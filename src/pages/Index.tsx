@@ -6,9 +6,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ParticleGrid from "@/components/ParticleGrid";
+import HeroScene from "@/components/HeroScene";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowCard from "@/components/GlowCard";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 
 const stats = [
   { label: "Learning Areas", value: 8, suffix: "+" },
@@ -79,7 +80,10 @@ const Index = () => {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <ParticleGrid />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background pointer-events-none" />
 
         {/* Floating shapes */}
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/5 blur-3xl animate-float" />

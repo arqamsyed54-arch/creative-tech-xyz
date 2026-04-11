@@ -9,6 +9,11 @@ import ParticleGrid from "@/components/ParticleGrid";
 import HeroScene from "@/components/HeroScene";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowCard from "@/components/GlowCard";
+import TechMarquee from "@/components/TechMarquee";
+import Testimonials from "@/components/Testimonials";
+import RoadmapTimeline from "@/components/RoadmapTimeline";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import TypingHeadline from "@/components/TypingHeadline";
 import { useEffect, useState, useRef, Suspense } from "react";
 
 const stats = [
@@ -109,8 +114,8 @@ const Index = () => {
             className="text-4xl sm:text-5xl md:text-7xl font-display font-bold leading-tight mb-6 max-w-5xl mx-auto"
           >
             Building the{" "}
-            <span className="gradient-text">Intelligent Generation</span>
-            {" "}of Tomorrow
+            <TypingHeadline />
+            {" "}Generation of Tomorrow
           </motion.h1>
 
           <motion.p
@@ -144,8 +149,11 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </section>
 
+      {/* Tech Marquee */}
+      <TechMarquee />
+
       {/* Stats */}
-      <section className="py-16 border-y border-border/30">
+      <section className="py-16 border-b border-border/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
@@ -184,6 +192,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Why Choose Us */}
+      <WhyChooseUs />
+
       {/* Ecosystem */}
       <section className="py-24 gradient-bg">
         <div className="container mx-auto px-4">
@@ -213,6 +224,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* Roadmap */}
+      <RoadmapTimeline />
 
       {/* CTA Banner */}
       <section className="py-24">

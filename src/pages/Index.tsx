@@ -14,6 +14,8 @@ import Testimonials from "@/components/Testimonials";
 import RoadmapTimeline from "@/components/RoadmapTimeline";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import TypingHeadline from "@/components/TypingHeadline";
+import PoweredByTools from "@/components/PoweredByTools";
+import FutureSkills from "@/components/FutureSkills";
 import { useEffect, useState, useRef, Suspense } from "react";
 
 const stats = [
@@ -224,6 +226,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Powered By Tools */}
+      <PoweredByTools />
+
+      {/* Future Skills */}
+      <FutureSkills />
 
       {/* Testimonials */}
       <Testimonials />

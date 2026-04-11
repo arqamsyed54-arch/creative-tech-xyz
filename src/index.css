@@ -169,3 +169,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(190 95% 55% / 0.5);
 }
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: hsl(190 95% 55% / 0.3);
+  color: hsl(210 40% 96%);
+}

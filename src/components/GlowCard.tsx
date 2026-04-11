@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 interface GlowCardProps {
   children: ReactNode;
@@ -7,11 +8,12 @@ interface GlowCardProps {
 
 const GlowCard = ({ children, className = "" }: GlowCardProps) => {
   return (
-    <div
-      className={`glass gradient-border rounded-xl p-6 transition-all duration-500 hover:glow-cyan hover:scale-[1.02] ${className}`}
+    <motion.div
+      className={`glass gradient-border rounded-xl p-6 transition-all duration-500 hover:glow-cyan ${className}`}
+      whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.3 } }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 

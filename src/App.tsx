@@ -17,6 +17,7 @@ import InnovationLab from "./pages/InnovationLab";
 import Community from "./pages/Community";
 import Founder from "./pages/Founder";
 import Contact from "./pages/Contact";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const AnimatedRoutes = () => {
         <Route path="/community" element={<PageTransition><Community /></PageTransition>} />
         <Route path="/founder" element={<PageTransition><Founder /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/auth" element={<PageTransition><Auth /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>

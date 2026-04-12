@@ -16,6 +16,17 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import TypingHeadline from "@/components/TypingHeadline";
 import PoweredByTools from "@/components/PoweredByTools";
 import FutureSkills from "@/components/FutureSkills";
+import Newsletter from "@/components/sections/Newsletter";
+import ImpactNumbers from "@/components/sections/ImpactNumbers";
+import HowItWorks from "@/components/sections/HowItWorks";
+import TeamSection from "@/components/sections/TeamSection";
+import FAQ from "@/components/sections/FAQ";
+import Partners from "@/components/sections/Partners";
+import SuccessStories from "@/components/sections/SuccessStories";
+import LearningApproach from "@/components/sections/LearningApproach";
+import IndustryFocus from "@/components/sections/IndustryFocus";
+import FounderQuote from "@/components/sections/FounderQuote";
+import TechStack3D from "@/components/sections/TechStack3D";
 import { useEffect, useState, useRef, Suspense } from "react";
 
 const stats = [
@@ -57,12 +68,8 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
           let current = 0;
           const timer = setInterval(() => {
             current += step;
-            if (current >= target) {
-              setCount(target);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(current));
-            }
+            if (current >= target) { setCount(target); clearInterval(timer); }
+            else setCount(Math.floor(current));
           }, 16);
         }
       },
@@ -91,67 +98,38 @@ const Index = () => {
           <HeroScene />
         </Suspense>
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background pointer-events-none" />
-
-        {/* Floating shapes */}
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/5 blur-3xl animate-float" />
         <div className="absolute bottom-32 right-20 w-48 h-48 rounded-full bg-secondary/5 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
         <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-blue-glow/5 blur-2xl animate-float" style={{ animationDelay: "4s" }} />
 
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass glow-border mb-8">
               <Zap size={14} className="text-primary" />
               <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">Next-Generation Technology Education</span>
             </div>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl md:text-7xl font-display font-bold leading-tight mb-6 max-w-5xl mx-auto"
-          >
-            Building the{" "}
-            <TypingHeadline />
-            {" "}Generation of Tomorrow
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="text-4xl sm:text-5xl md:text-7xl font-display font-bold leading-tight mb-6 max-w-5xl mx-auto">
+            Building the <TypingHeadline /> Generation of Tomorrow
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
+          <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
             Creative Tech XYZ is a futuristic technology learning platform dedicated to empowering the next generation with knowledge of artificial intelligence, modern technology, and innovation.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="glow-cyan font-display text-base px-8 bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link to="/programs">
-                Explore Programs <ArrowRight size={18} />
-              </Link>
+              <Link to="/programs">Explore Programs <ArrowRight size={18} /></Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="glow-border font-display text-base px-8 border-primary/30 text-foreground hover:bg-primary/10">
-              <Link to="/community">
-                Join the Community
-              </Link>
+              <Link to="/auth">Get Started Free</Link>
             </Button>
           </motion.div>
         </div>
-
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </section>
 
-      {/* Tech Marquee */}
       <TechMarquee />
 
       {/* Stats */}
@@ -172,14 +150,9 @@ const Index = () => {
       <section className="py-24">
         <div className="container mx-auto px-4">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              Our <span className="gradient-text">Core Values</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              The principles that drive our mission to build a strong and intelligent generation of innovators.
-            </p>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Our <span className="gradient-text">Core Values</span></h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">The principles that drive our mission to build a strong and intelligent generation of innovators.</p>
           </AnimatedSection>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {values.map((v, i) => (
               <AnimatedSection key={v.title} delay={i * 0.08}>
@@ -194,21 +167,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
       <WhyChooseUs />
+      <HowItWorks />
 
       {/* Ecosystem */}
       <section className="py-24 gradient-bg">
         <div className="container mx-auto px-4">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              The Learning <span className="gradient-text">Ecosystem</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              More than a course platform — a complete ecosystem for developing intelligence, skills, and entrepreneurial thinking.
-            </p>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">The Learning <span className="gradient-text">Ecosystem</span></h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">More than a course platform — a complete ecosystem for developing intelligence, skills, and entrepreneurial thinking.</p>
           </AnimatedSection>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {ecosystem.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1}>
@@ -227,17 +195,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Powered By Tools */}
       <PoweredByTools />
-
-      {/* Future Skills */}
+      <LearningApproach />
       <FutureSkills />
-
-      {/* Testimonials */}
+      <TechStack3D />
+      <ImpactNumbers />
+      <FounderQuote />
+      <IndustryFocus />
+      <SuccessStories />
+      <Partners />
+      <TeamSection />
       <Testimonials />
-
-      {/* Roadmap */}
       <RoadmapTimeline />
+      <FAQ />
+      <Newsletter />
 
       {/* CTA Banner */}
       <section className="py-24">
@@ -247,16 +218,12 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5" />
               <div className="relative z-10">
                 <TrendingUp className="text-primary mx-auto mb-6" size={40} />
-                <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                  Ready to Shape the Future?
-                </h2>
+                <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Ready to Shape the Future?</h2>
                 <p className="text-muted-foreground max-w-lg mx-auto mb-8 leading-relaxed">
                   Join Creative Tech XYZ and become part of a movement that's building the next generation of innovators, creators, and technology leaders.
                 </p>
                 <Button asChild size="lg" className="font-display text-base px-8 bg-primary text-primary-foreground hover:bg-primary/90 glow-cyan">
-                  <Link to="/programs">
-                    Get Started <ArrowRight size={18} />
-                  </Link>
+                  <Link to="/auth">Get Started Free <ArrowRight size={18} /></Link>
                 </Button>
               </div>
             </div>

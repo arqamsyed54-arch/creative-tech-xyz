@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, LogIn, LogOut, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -19,7 +21,9 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -31,12 +35,25 @@ const Navbar = () => {
     setMobileOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "glass glow-border py-3"
-          : "bg-transparent py-5"
+        scrolled ? "glass glow-border py-3" : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
@@ -62,6 +79,28 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+
+          {user ? (
+            <div className="flex items-center gap-2 ml-2">
+              <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                <User size={14} className="text-primary" />
+              </div>
+              <Button
+                onClick={handleSignOut}
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <LogOut size={14} /> Sign Out
+              </Button>
+            </div>
+          ) : (
+            <Button asChild size="sm" className="ml-2 bg-primary text-primary-foreground hover:bg-primary/90 glow-cyan">
+              <Link to="/auth">
+                <LogIn size={14} /> Sign In
+              </Link>
+            </Button>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -97,6 +136,21 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+              {user ? (
+                <button
+                  onClick={handleSignOut}
+                  className="px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 text-left flex items-center gap-2"
+                >
+                  <LogOut size={14} /> Sign Out
+                </button>
+              ) : (
+                <Link
+                  to="/auth"
+                  className="px-4 py-3 rounded-lg text-sm font-medium text-primary bg-primary/10"
+                >
+                  Sign In / Sign Up
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

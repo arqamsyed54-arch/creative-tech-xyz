@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Space Grotesk"', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['Sora', 'sans-serif'],
+        body: ['Manrope', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,15 +52,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        cyan: {
-          glow: "hsl(var(--cyan-glow))",
-        },
-        purple: {
-          glow: "hsl(var(--purple-glow))",
-        },
-        blue: {
-          glow: "hsl(var(--blue-glow))",
-        },
+        cyan: { glow: "hsl(var(--cyan-glow))" },
+        purple: { glow: "hsl(var(--purple-glow))" },
+        blue: { glow: "hsl(var(--blue-glow))" },
+        violet: { glow: "hsl(var(--violet-glow))" },
+        amber: { glow: "hsl(var(--amber-glow))" },
+        pink: { glow: "hsl(var(--pink-glow))" },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

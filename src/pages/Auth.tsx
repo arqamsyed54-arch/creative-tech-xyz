@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Lock, User, ArrowRight, Eye, EyeOff, Sparkles } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Eye, EyeOff, Sparkles, ExternalLink, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,10 +16,12 @@ const Auth = () => {
   const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [inIframe, setInIframe] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
+    try { setInIframe(window.self !== window.top); } catch { setInIframe(true); }
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) navigate("/");
     });
@@ -28,6 +30,10 @@ const Auth = () => {
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  const openInNewTab = () => {
+    window.open(window.location.href, "_blank", "noopener,noreferrer");
+  };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,6 +109,30 @@ const Auth = () => {
               {isLogin ? "Sign in to continue your journey" : "Create your account to get started"}
             </p>
           </div>
+
+          {inIframe && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 p-4 rounded-xl bg-secondary/10 border border-secondary/30"
+            >
+              <div className="flex items-start gap-3">
+                <AlertTriangle size={18} className="text-secondary shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-foreground mb-1">Login may not work in preview</p>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    Browsers block sign-in (especially Google) inside embedded previews. Open in a new tab to test properly.
+                  </p>
+                  <button
+                    onClick={openInNewTab}
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-secondary hover:underline"
+                  >
+                    Open in new tab <ExternalLink size={12} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* Google Sign In */}
           <Button
